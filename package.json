@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
+    "eslint": "eslint .",
     "prestart": "npm run rebuild",
     "pretest": "npm run rebuild",
     "rebuild": "npm run clean && npm run build",
@@ -18,6 +19,7 @@
   "author": "Juan Diego <jdiegopm12@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.40.0",
     "typescript": "^5.0.4"
   }
 }
