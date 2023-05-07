@@ -18,6 +18,12 @@
   "author": "Juan Diego <jdiegopm12@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.1.0",
+    "tslib": "^2.5.0",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "bullmq": "^3.13.1",
+    "dotenv": "^16.0.3"
   }
 }
