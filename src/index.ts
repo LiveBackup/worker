@@ -1,4 +1,4 @@
-import Worker from './worker'
+import Worker from './worker';
 import dotenv from 'dotenv';
 
 dotenv.config();

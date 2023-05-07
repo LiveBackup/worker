@@ -12,4 +12,7 @@ module.exports = {
     // 'prettier',
   ],
   parser: '@typescript-eslint/parser',
+  rules: {
+    'require-jsdoc': 0,
+  },
 };

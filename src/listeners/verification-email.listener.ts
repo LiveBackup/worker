@@ -1,6 +1,6 @@
-import { Job } from "bullmq";
-import { BaseListener } from "./base-listener.listener";
-import { DBConnectionConfig, tastsQueuesConfig } from "../datasources";
+import {Job} from 'bullmq';
+import {BaseListener} from './base-listener.listener';
+import {DBConnectionConfig, tastsQueuesConfig} from '../datasources';
 
 export class VerificationEmailListener extends BaseListener {
   constructor(dbConfig: DBConnectionConfig = tastsQueuesConfig) {

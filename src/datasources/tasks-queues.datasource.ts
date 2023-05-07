@@ -1,4 +1,4 @@
-import { DBConnectionConfig } from ".";
+import {DBConnectionConfig} from '.';
 
 export const tastsQueuesConfig: DBConnectionConfig = {
   name: 'tasks_queues',

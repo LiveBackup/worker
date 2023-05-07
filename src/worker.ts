@@ -1,5 +1,5 @@
-import { DBConnectionConfig, tastsQueuesConfig } from "./datasources";
-import { BaseListener, VerificationEmailListener } from "./listeners";
+import {DBConnectionConfig, tastsQueuesConfig} from './datasources';
+import {BaseListener, VerificationEmailListener} from './listeners';
 
 export default class Worker {
   protected dbConfig: DBConnectionConfig;
@@ -10,17 +10,19 @@ export default class Worker {
     this.listeners = {};
   }
 
-  getDbConfig(): DBConnectionConfig { return this.dbConfig; }
+  getDbConfig(): DBConnectionConfig {
+    return this.dbConfig;
+  }
 
   setDbConfig(config: DBConnectionConfig) {
     this.dbConfig = config;
   }
 
   boot() {
-    let listener:BaseListener;
+    // let listener:BaseListener;
 
     // Set Verification Email listener
-    listener = new VerificationEmailListener(this.dbConfig);
+    const listener = new VerificationEmailListener(this.dbConfig);
     this.setListener(listener.getName(), listener);
   }
 
@@ -31,4 +33,4 @@ export default class Worker {
   setListener(listenerName: string, listener: BaseListener) {
     this.listeners[listenerName] = listener;
   }
-};
+}
