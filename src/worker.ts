@@ -3,7 +3,7 @@ import {BaseListener, VerificationEmailListener} from './listeners';
 
 export default class Worker {
   protected dbConfig: DBConnectionConfig;
-  protected listeners: { [listener: string]: BaseListener };
+  protected listeners: {[listener: string]: BaseListener};
 
   constructor() {
     this.dbConfig = tastsQueuesConfig;

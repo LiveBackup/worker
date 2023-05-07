@@ -9,7 +9,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'google',
-    // 'prettier',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   rules: {

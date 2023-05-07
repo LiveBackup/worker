@@ -8,7 +8,7 @@ async function main() {
   worker.boot();
 }
 
-main().catch((error) => {
+main().catch(error => {
   console.error('Cannot start the applicatioin:', error);
   process.exit(1);
 });

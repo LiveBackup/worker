@@ -2,16 +2,13 @@ import {Worker, Job, WorkerOptions} from 'bullmq';
 import {IListener} from './ilistener.listener';
 import {DBConnectionConfig} from '../datasources';
 
-export type JobAction = (job: Job) => Promise<void>
+export type JobAction = (job: Job) => Promise<void>;
 
 export abstract class BaseListener implements IListener {
   protected name: string;
   protected worker: Worker;
 
-  constructor(
-      name:string,
-      config:DBConnectionConfig
-  ) {
+  constructor(name: string, config: DBConnectionConfig) {
     this.name = name;
 
     const opts: WorkerOptions = {
@@ -27,7 +24,7 @@ export abstract class BaseListener implements IListener {
     this.worker = new Worker(this.name, this.executeJob, opts);
   }
 
-  getName():string {
+  getName(): string {
     return this.name;
   }
 
