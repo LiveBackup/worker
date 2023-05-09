@@ -1,5 +1,5 @@
 import {Job} from 'bullmq';
-import {BaseListener} from './base-listener.listener';
+import {BaseListener} from './base.listener';
 import {DBConnectionConfig, tastsQueuesConfig} from '../datasources';
 
 export class VerificationEmailListener extends BaseListener {

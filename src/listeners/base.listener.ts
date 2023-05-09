@@ -28,10 +28,6 @@ export abstract class BaseListener implements IListener {
     return this.name;
   }
 
-  getWorker(): Worker {
-    return this.worker;
-  }
-
   executeJob(job: Job): Promise<void> {
     throw new Error(`Method not implemented. Cannot process: ${job.name}`);
   }

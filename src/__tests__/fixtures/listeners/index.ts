@@ -1,1 +1,1 @@
-export * from './test-base-listener.listener';
+export * from './test-base.listener';

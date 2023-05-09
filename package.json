@@ -21,7 +21,7 @@
     "prettier:fix": "npm run prettier:cli -- --write",
     "rebuild": "npm run clean && npm run build",
     "start": "node dist/index.js",
-    "test": "mocha dist/__tests__"
+    "test": "nyc mocha dist/__tests__"
   },
   "author": "Juan Diego <jdiegopm12@gmail.com>",
   "license": "ISC",
@@ -36,6 +36,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
     "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "prettier": "^2.8.8",
     "redis-memory-server": "^0.6.0",
     "source-map-support": "^0.5.21",

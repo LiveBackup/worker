@@ -1,3 +1,3 @@
-export * from './base-listener.listener';
+export * from './base.listener';
 export * from './ilistener.listener';
 export * from './verification-email.listener';
