@@ -8,8 +8,9 @@ export abstract class BaseListener implements IListener {
   protected name: string;
   protected worker: Worker;
 
-  constructor(name: string, config: DBConnectionConfig) {
+  constructor(name: string, dbConfig: DBConnectionConfig) {
     this.name = name;
+    const config = dbConfig;
 
     const opts: WorkerOptions = {
       connection: {

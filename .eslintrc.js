@@ -13,6 +13,8 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   rules: {
+    '@typescript-eslint/no-namespace': 0,
+    '@typescript-eslint/no-explicit-any': 0,
     'require-jsdoc': 0,
   },
 };

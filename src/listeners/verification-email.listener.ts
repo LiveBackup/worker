@@ -1,13 +1,19 @@
 import {Job} from 'bullmq';
 import {BaseListener} from './base.listener';
-import {DBConnectionConfig, tastsQueuesConfig} from '../datasources';
+import {DBConnectionConfig} from '../datasources';
+import {EmailService} from '../services';
 
 export class VerificationEmailListener extends BaseListener {
-  constructor(dbConfig: DBConnectionConfig = tastsQueuesConfig) {
+  protected emailService: EmailService;
+
+  constructor(dbConfig: DBConnectionConfig, emailService: EmailService) {
     super('VerificationEmail', dbConfig);
+    this.emailService = emailService;
   }
 
   async executeJob(job: Job): Promise<void> {
-    console.log(`I'm in danger: ${job.name}`);
+    const webAppUrl = 'http://localhost:3000';
+    const {email, accessToken} = job.data;
+    this.emailService.sendVerificationEmail(webAppUrl, email, accessToken);
   }
 }
