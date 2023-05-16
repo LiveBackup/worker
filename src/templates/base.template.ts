@@ -1,14 +1,10 @@
 export abstract class BaseTemplate {
   protected name: string;
-  protected subject: string;
+  readonly subject: string;
 
   constructor(name: string, subject: string) {
     this.name = name;
     this.subject = subject;
-  }
-
-  public getSubject(): string {
-    return this.subject;
   }
 
   protected buildStyles(): string {

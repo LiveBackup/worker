@@ -6,7 +6,7 @@ type BindFunction = {
   to: (value: any) => void;
 };
 
-export default class Singleton {
+export default class App {
   protected dbConfig: DBConnectionConfig;
   protected bindings: {[key: string]: any};
   protected listeners: {[listener: string]: BaseListener};
@@ -54,6 +54,7 @@ export default class Singleton {
       this.getBinding<string>(EmailServiceBindings.EMAIL_SENDER_USER),
       this.getBinding<string>(EmailServiceBindings.EMAIL_SENDER_PASSWORD),
     );
+    this.bind(EmailServiceBindings.EMAIL_SERVICE).to(emailService);
 
     /* Setup the listeners */
     // TODO: Delete eslint-diables, they are temporal

@@ -2,6 +2,7 @@ import {Transporter, createTransport} from 'nodemailer';
 import {BaseTemplate, EmailVerificationTemplate} from '../templates';
 
 export namespace EmailServiceBindings {
+  export const EMAIL_SERVICE = 'services.EmailService';
   export const EMAIL_TRANSPORT_HOST = 'services.email.transport.host';
   export const EMAIL_TRANSPORT_PORT = 'services.email.transport.port';
   export const EMAIL_SENDER_USER = 'services.email.sender.user';
@@ -9,8 +10,7 @@ export namespace EmailServiceBindings {
 }
 
 export class EmailService {
-  protected templateFolder: string;
-  protected transport: Transporter;
+  readonly transport: Transporter;
 
   constructor(host: string, port: number, user: string, password: string) {
     const auth = {user, pass: password};
@@ -21,7 +21,7 @@ export class EmailService {
     return this.transport.sendMail({
       from: 'jdiegopm12@gmail.com',
       to,
-      subject: template.getSubject(),
+      subject: template.subject,
       html: template.buildTemplate(),
     });
   }
