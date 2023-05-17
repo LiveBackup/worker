@@ -51,7 +51,7 @@ describe('e2e - Verification Email Listener', () => {
 
     const emailJob = {
       email: 'test@gmail.com',
-      token: 'token123',
+      accessToken: 'token123',
     };
 
     const finished = new Promise(resolve => {
@@ -66,11 +66,11 @@ describe('e2e - Verification Email Listener', () => {
     expect(sendEmailVerificationSpy.calledOnce).to.be.equal(true);
     expect(
       sendEmailVerificationSpy.calledOnceWithExactly(
-        'https://localhost:3000',
+        'http://localhost:3000',
         'test@gmail.com',
         'token123',
       ),
-    );
+    ).to.be.equals(true);
     expect(sendEmailStub.calledOnce).to.be.equal(true);
   });
 
@@ -81,7 +81,7 @@ describe('e2e - Verification Email Listener', () => {
 
     const emailJob = {
       email: 'test@gmail.com',
-      token: 'token123',
+      accessToken: 'token123',
     };
 
     const errorPromise = new Promise(resolve => {

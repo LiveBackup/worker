@@ -3,6 +3,7 @@ import {expect} from 'chai';
 import {DBConnectionConfig} from '../../../datasources';
 import {getTestTasksQueuesConfig} from '../../fixtures/datasources';
 import {TestBaseListener} from '../../fixtures/listeners';
+import {givenJob} from '../../helpers/app.helper';
 
 describe('Unit Testing - Base Listener', () => {
   const listenerName = 'TestListener';
@@ -12,6 +13,10 @@ describe('Unit Testing - Base Listener', () => {
   before(async () => {
     tasksQueuesConfig = await getTestTasksQueuesConfig();
     baseListener = new TestBaseListener(listenerName, tasksQueuesConfig);
+  });
+
+  after(async () => {
+    await baseListener.worker.close();
   });
 
   it('Has a name', async () => {
@@ -31,5 +36,19 @@ describe('Unit Testing - Base Listener', () => {
     expect(expectedError?.message).to.be.equal(
       'Method not implemented. Cannot process: Mock',
     );
+  });
+
+  it('Handle an error when job fails', async () => {
+    const job = await givenJob('Dummy', {});
+    const expectedError = new Error('Could not process the job');
+
+    let error = '';
+    console.error = err => {
+      error = err;
+    };
+
+    baseListener.handleError(job, expectedError);
+
+    expect(error).to.be.equals(expectedError.message);
   });
 });
