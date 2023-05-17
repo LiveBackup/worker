@@ -10,10 +10,10 @@ async function main() {
   // Setup the email sender credentials
   app
     .bind(EmailServiceBindings.EMAIL_TRANSPORT_HOST)
-    .to(process.env.EMAIL_SENDER_NAME);
+    .to(process.env.EMAIL_TRANSPORT_HOST);
   app
     .bind(EmailServiceBindings.EMAIL_TRANSPORT_PORT)
-    .to(Number(process.env.EMAIL_SENDER_NAME));
+    .to(Number(process.env.EMAIL_TRANSPORT_PORT));
   app
     .bind(EmailServiceBindings.EMAIL_SENDER_USER)
     .to(process.env.EMAIL_SENDER_NAME);
@@ -22,6 +22,8 @@ async function main() {
     .to(process.env.EMAIL_SENDER_PASSWORD);
 
   app.start();
+
+  console.log('Listening queues');
 }
 
 main().catch(error => {

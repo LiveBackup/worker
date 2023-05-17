@@ -12,6 +12,7 @@ export class VerificationEmailListener extends BaseListener {
   }
 
   async executeJob(job: Job): Promise<void> {
+    console.log('Sending verification email');
     const webAppUrl = 'http://localhost:3000';
     const {email, accessToken} = job.data;
     this.emailService.sendVerificationEmail(webAppUrl, email, accessToken);
