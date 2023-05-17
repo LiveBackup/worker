@@ -17,7 +17,7 @@ export const givenRunningApp = async function (): Promise<App> {
   return app;
 };
 
-export const givenJob = async function (name: string, data: any): Promise<Job> {
+export const givenQueue = async function (name = 'TestQueue'): Promise<Queue> {
   const queueConfig = await getTestTasksQueuesConfig();
 
   const bullMQSettings: QueueOptions = {
@@ -29,7 +29,11 @@ export const givenJob = async function (name: string, data: any): Promise<Job> {
     },
   };
 
-  const testQueue = new Queue('TestQueue', bullMQSettings);
+  return new Queue(name, bullMQSettings);
+};
+
+export const givenJob = async function (name: string, data: any): Promise<Job> {
+  const testQueue = await givenQueue();
   const job = testQueue.add(name, data);
   testQueue.close();
   return job;

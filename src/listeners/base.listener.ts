@@ -1,12 +1,12 @@
-import {Worker, Job, WorkerOptions} from 'bullmq';
-import {IListener} from './ilistener.listener';
+import {Job, Worker, WorkerOptions} from 'bullmq';
 import {DBConnectionConfig} from '../datasources';
+import {IListener} from './ilistener.listener';
 
 export type JobAction = (job: Job) => Promise<void>;
 
 export abstract class BaseListener implements IListener {
-  protected name: string;
-  protected worker: Worker;
+  readonly name: string;
+  readonly worker: Worker;
 
   constructor(name: string, dbConfig: DBConnectionConfig) {
     this.name = name;
@@ -22,14 +22,21 @@ export abstract class BaseListener implements IListener {
       },
     };
 
-    this.worker = new Worker(this.name, this.executeJob, opts);
-  }
-
-  getName(): string {
-    return this.name;
+    this.worker = new Worker(
+      this.name,
+      async (job: Job) => this.executeJob(job),
+      opts,
+    );
+    this.worker.on('failed', (job: Job | undefined, err: Error) =>
+      this.handleError(job, err),
+    );
   }
 
   executeJob(job: Job): Promise<void> {
     throw new Error(`Method not implemented. Cannot process: ${job.name}`);
+  }
+
+  handleError(job: Job | undefined, error: Error): void {
+    console.error(error.message);
   }
 }

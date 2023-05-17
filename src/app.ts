@@ -58,10 +58,20 @@ export default class App {
 
     /* Setup the listeners */
     // TODO: Delete eslint-diables, they are temporal
-    let listener: BaseListener; // eslint-disable-line
+    // eslint-disable-next-line
+    let listener: BaseListener;
 
     // Set Verification Email listener
-    listener = new VerificationEmailListener(this.dbConfig, emailService); // eslint-disable-line
-    this.setListener(listener.getName(), listener);
+    // eslint-disable-next-line
+    listener = new VerificationEmailListener(this.dbConfig, emailService);
+    this.setListener(listener.name, listener);
+  }
+
+  async stop() {
+    // TODO: Delete eslint-diables, they are temporal
+    // eslint-disable-next-line
+    for (let listener of Object.values(this.listeners)) {
+      await listener.worker.close();
+    }
   }
 }

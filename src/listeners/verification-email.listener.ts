@@ -1,7 +1,7 @@
 import {Job} from 'bullmq';
-import {BaseListener} from './base.listener';
 import {DBConnectionConfig} from '../datasources';
 import {EmailService} from '../services';
+import {BaseListener} from './base.listener';
 
 export class VerificationEmailListener extends BaseListener {
   protected emailService: EmailService;
@@ -12,9 +12,15 @@ export class VerificationEmailListener extends BaseListener {
   }
 
   async executeJob(job: Job): Promise<void> {
-    console.log('Sending verification email');
+    console.log('Sending veification email');
+
     const webAppUrl = 'http://localhost:3000';
     const {email, accessToken} = job.data;
-    this.emailService.sendVerificationEmail(webAppUrl, email, accessToken);
+    const response = await this.emailService.sendVerificationEmail(
+      webAppUrl,
+      email,
+      accessToken,
+    );
+    console.log(`Email sent: ${response.accepted}`);
   }
 }

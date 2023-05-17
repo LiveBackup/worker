@@ -35,7 +35,7 @@ export class EmailService {
     try {
       return await this.sendEmail(to, emailVerification);
     } catch (error) {
-      console.error(`Could not send verification email: ${error.message}`);
+      throw new Error(`Could not send verification email: ${error.message}`);
     }
   }
 }
