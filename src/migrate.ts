@@ -1,5 +1,5 @@
-import {EmailVerificationTemplate} from './templates';
 import * as fs from 'node:fs';
+import {EmailVerificationTemplate, PasswordRecoveryTemplate} from './templates';
 
 async function main() {
   const folder = './html';
@@ -7,6 +7,10 @@ async function main() {
     {
       name: 'verifyEmail',
       template: new EmailVerificationTemplate('appUrl', 'token'),
+    },
+    {
+      name: 'passwordRecovery',
+      template: new PasswordRecoveryTemplate('appUrl', 'token'),
     },
   ];
 

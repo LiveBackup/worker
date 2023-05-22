@@ -16,7 +16,7 @@ export abstract class BaseTemplate {
   public buildTemplate(): string {
     const styles = this.buildStyles();
     const body = this.buildBody();
-    return `
+    const html = `
       <!DOCTYPE html>
       <html lang="es">
 
@@ -35,5 +35,9 @@ export abstract class BaseTemplate {
 
       </html>
     `;
+
+    // TODO: evaluate if the html can be formated and unnecesary spaces and new
+    // lines can be deleted. Regex were used but they could introduce a vulnerability
+    return html;
   }
 }

@@ -1,5 +1,9 @@
 import {DBConnectionConfig, tastsQueuesConfig} from './datasources';
-import {BaseListener, VerificationEmailListener} from './listeners';
+import {
+  BaseListener,
+  PasswordRecoveryListener,
+  VerificationEmailListener,
+} from './listeners';
 import {EmailService, EmailServiceBindings} from './services';
 
 type BindFunction = {
@@ -57,20 +61,19 @@ export default class App {
     this.bind(EmailServiceBindings.EMAIL_SERVICE).to(emailService);
 
     /* Setup the listeners */
-    // TODO: Delete eslint-diables, they are temporal
-    // eslint-disable-next-line
     let listener: BaseListener;
 
     // Set Verification Email listener
-    // eslint-disable-next-line
     listener = new VerificationEmailListener(this.dbConfig, emailService);
+    this.setListener(listener.name, listener);
+
+    // Set Password Recovery listener
+    listener = new PasswordRecoveryListener(this.dbConfig, emailService);
     this.setListener(listener.name, listener);
   }
 
   async stop() {
-    // TODO: Delete eslint-diables, they are temporal
-    // eslint-disable-next-line
-    for (let listener of Object.values(this.listeners)) {
+    for (const listener of Object.values(this.listeners)) {
       await listener.worker.close();
     }
   }

@@ -3,21 +3,21 @@ import {DBConnectionConfig} from '../datasources';
 import {EmailService} from '../services';
 import {BaseListener} from './base.listener';
 
-export class VerificationEmailListener extends BaseListener {
+export class PasswordRecoveryListener extends BaseListener {
   protected emailService: EmailService;
 
   constructor(dbConfig: DBConnectionConfig, emailService: EmailService) {
-    super('VerificationEmail', dbConfig);
+    super('PasswordRecovery', dbConfig);
     this.emailService = emailService;
   }
 
   async executeJob(job: Job): Promise<void> {
     const webAppUrl = 'http://localhost:3000';
-    const {email, accessToken} = job.data;
-    await this.emailService.sendVerificationEmail(
+    const {email, recoveryToken} = job.data;
+    await this.emailService.sendPasswordRecoveryEmail(
       webAppUrl,
       email,
-      accessToken,
+      recoveryToken,
     );
   }
 }
