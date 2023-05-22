@@ -36,6 +36,8 @@ export abstract class BaseTemplate {
       </html>
     `;
 
-    return html.replace(/[\n\r ]+</g, '<').replace(/>[\n\r ]+/g, '>');
+    // TODO: evaluate if the html can be formated and unnecesary spaces and new
+    // lines can be deleted. Regex were used but they could introduce a vulnerability
+    return html;
   }
 }
