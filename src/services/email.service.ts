@@ -1,5 +1,9 @@
 import {Transporter, createTransport} from 'nodemailer';
-import {BaseTemplate, EmailVerificationTemplate} from '../templates';
+import {
+  BaseTemplate,
+  EmailVerificationTemplate,
+  PasswordRecoveryTemplate,
+} from '../templates';
 
 export namespace EmailServiceBindings {
   export const EMAIL_SERVICE = 'services.EmailService';
@@ -36,6 +40,21 @@ export class EmailService {
       return await this.sendEmail(to, emailVerification);
     } catch (error) {
       throw new Error(`Could not send verification email: ${error.message}`);
+    }
+  }
+
+  async sendPasswordRecoveryEmail(
+    webAppUrl: string,
+    to: string,
+    token: string,
+  ): Promise<any> {
+    const passwordRecovery = new PasswordRecoveryTemplate(webAppUrl, token);
+    try {
+      return await this.sendEmail(to, passwordRecovery);
+    } catch (error) {
+      throw new Error(
+        `Could not send password recovery email: ${error.message}`,
+      );
     }
   }
 }

@@ -16,7 +16,7 @@ export abstract class BaseTemplate {
   public buildTemplate(): string {
     const styles = this.buildStyles();
     const body = this.buildBody();
-    return `
+    const html = `
       <!DOCTYPE html>
       <html lang="es">
 
@@ -35,5 +35,7 @@ export abstract class BaseTemplate {
 
       </html>
     `;
+
+    return html.replace(/[\n\r ]+</g, '<').replace(/>[\n\r ]+/g, '>');
   }
 }
