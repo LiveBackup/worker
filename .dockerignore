@@ -1,0 +1,23 @@
+# Folders
+.git
+.github
+.vscode
+.nyc_output
+coverage
+dist
+html
+node_modules
+
+# Files
+.dockerignore
+.env
+.eslintignore
+.eslintrc.js
+.gitignore
+.mocharc.json
+.nycrc
+.prettierignore
+.prettierrc
+Dockerfile
+sonar-project.properties
+tsconfig.tsbuildinfo
