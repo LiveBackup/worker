@@ -10,7 +10,7 @@
     "build": "tsc",
     "clean": "rm -rf dist *.tsbuildinfo",
     "docker:build": "docker build -t livebackup/worker:latest .",
-    "docker:run": "docker run -d --env-file=.env --name livebackup_worker livebackup/worker:latest",
+    "docker:run": "docker run -d --network livebackup --env-file=.env --name livebackup_worker livebackup/worker:latest",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "lint": "npm run eslint && npm run prettier:check",

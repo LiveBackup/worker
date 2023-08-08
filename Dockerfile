@@ -1,7 +1,7 @@
 # Container base image
 FROM node:16-slim
 
-# Set to a non-root built-in user `node`
+# Set to root user
 USER root
 
 # Install necessary build tools
@@ -24,6 +24,9 @@ COPY --chown=node . .
 
 # Build the app
 RUN npm run rebuild
+
+# Unistall devDependencies
+RUN npm prune --production
 
 # Remove source code and build configuration
 RUN rm -rf src tsconfig.json tsconfig.tsbuildinfo
