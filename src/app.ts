@@ -4,6 +4,7 @@ import {
   PasswordRecoveryListener,
   VerificationEmailListener,
 } from './listeners';
+import {TokensCleanupListener} from './listeners/tokens-cleanup.listener';
 import {EmailService, EmailServiceBindings} from './services';
 
 type BindFunction = {
@@ -69,6 +70,10 @@ export default class App {
 
     // Set Password Recovery listener
     listener = new PasswordRecoveryListener(this.dbConfig, emailService);
+    this.setListener(listener.name, listener);
+
+    // Set Tokens Cleanup listener
+    listener = new TokensCleanupListener(this.dbConfig);
     this.setListener(listener.name, listener);
   }
 
