@@ -5,8 +5,8 @@ import {BaseListener, TasksQueueConfig} from './base.listener';
 export class PasswordRecoveryListener extends BaseListener {
   protected emailService: EmailService;
 
-  constructor(dbConfig: TasksQueueConfig, emailService: EmailService) {
-    super('PasswordRecovery', dbConfig);
+  constructor(tasksQueuesConfig: TasksQueueConfig, emailService: EmailService) {
+    super('PasswordRecovery', tasksQueuesConfig);
     this.emailService = emailService;
   }
 

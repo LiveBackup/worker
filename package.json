@@ -52,9 +52,11 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@loopback/core": "^5.1.2",
     "@loopback/repository": "^6.1.2",
     "bullmq": "^3.13.1",
     "dotenv": "^16.0.3",
+    "loopback-connector-postgresql": "^5.5.2",
     "nodemailer": "^6.9.1"
   }
 }

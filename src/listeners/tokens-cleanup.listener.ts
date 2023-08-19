@@ -2,8 +2,8 @@ import {Job} from 'bullmq';
 import {BaseListener, TasksQueueConfig} from './base.listener';
 
 export class TokensCleanupListener extends BaseListener {
-  constructor(dbConfig: TasksQueueConfig) {
-    super('TokensCleanup', dbConfig);
+  constructor(tasksQueuesConfig: TasksQueueConfig) {
+    super('TokensCleanup', tasksQueuesConfig);
   }
 
   async executeJob(job: Job): Promise<void> {
