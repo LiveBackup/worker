@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import App from './app';
-import {TasksQueueConfig} from './listeners';
+import {ListenersBindings, TasksQueueConfig} from './listeners';
 import {EmailServiceBindings} from './services';
 
 dotenv.config();
@@ -9,7 +9,7 @@ async function main() {
   const app = new App();
 
   // Setup the redis connection options
-  app.bind('datasources.tasksQueues.config').to({
+  app.bind(ListenersBindings.TASKS_QUEUES_CONFIG).to({
     name: 'tasks_queues',
     host: process.env.TASKS_QUEUE_HOST ?? 'localhost',
     port: Number(process.env.TASKS_QUEUE_PORT ?? 6379),

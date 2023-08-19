@@ -10,6 +10,10 @@ export type TasksQueueConfig = {
   password?: string;
 };
 
+export namespace ListenersBindings {
+  export const TASKS_QUEUES_CONFIG = 'listeners.tasksQueues.config';
+}
+
 export type JobAction = (job: Job) => Promise<void>;
 
 export abstract class BaseListener implements IListener {

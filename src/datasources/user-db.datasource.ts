@@ -14,6 +14,10 @@ const config = {
   database: process.env.USER_DB_DATABASE,
 };
 
+export namespace UserDbBindings {
+  export const DB = 'datasources.user_db';
+}
+
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
