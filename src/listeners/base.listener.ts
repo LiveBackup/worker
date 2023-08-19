@@ -1,6 +1,14 @@
 import {Job, Worker, WorkerOptions} from 'bullmq';
-import {DBConnectionConfig} from '../datasources';
 import {IListener} from './ilistener.listener';
+
+export type TasksQueueConfig = {
+  name: string;
+  host: string;
+  port: number;
+  db: number;
+  user?: string;
+  password?: string;
+};
 
 export type JobAction = (job: Job) => Promise<void>;
 
@@ -8,9 +16,9 @@ export abstract class BaseListener implements IListener {
   readonly name: string;
   readonly worker: Worker;
 
-  constructor(name: string, dbConfig: DBConnectionConfig) {
+  constructor(name: string, tasksQueuesConfig: TasksQueueConfig) {
     this.name = name;
-    const config = dbConfig;
+    const config = tasksQueuesConfig;
 
     const opts: WorkerOptions = {
       connection: {

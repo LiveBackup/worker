@@ -52,6 +52,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@loopback/repository": "^6.1.2",
     "bullmq": "^3.13.1",
     "dotenv": "^16.0.3",
     "nodemailer": "^6.9.1"

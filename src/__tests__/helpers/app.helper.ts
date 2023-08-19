@@ -1,12 +1,15 @@
 import {Job, Queue, QueueOptions} from 'bullmq';
 import App from '../../app';
-import {getTestTasksQueuesConfig} from '../fixtures/datasources';
 import {EmailServiceBindings} from '../../services';
+import {getTestTasksQueuesConfig} from '../fixtures/datasources';
 
 export const givenRunningApp = async function (): Promise<App> {
   const app = new App();
 
-  app.setDbConfig(await getTestTasksQueuesConfig());
+  // Get Mock TasksQueuesConfig
+  const tasksQueuesConfig = await getTestTasksQueuesConfig();
+  app.bind('datasources.tasksQueues.config').to(tasksQueuesConfig);
+
   // Bind email credentials service
   app.bind(EmailServiceBindings.EMAIL_TRANSPORT_HOST).to('');
   app.bind(EmailServiceBindings.EMAIL_TRANSPORT_PORT).to(0);

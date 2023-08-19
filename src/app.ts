@@ -1,7 +1,7 @@
-import {DBConnectionConfig, tastsQueuesConfig} from './datasources';
 import {
   BaseListener,
   PasswordRecoveryListener,
+  TasksQueueConfig,
   VerificationEmailListener,
 } from './listeners';
 import {TokensCleanupListener} from './listeners/tokens-cleanup.listener';
@@ -12,22 +12,12 @@ type BindFunction = {
 };
 
 export default class App {
-  protected dbConfig: DBConnectionConfig;
   protected bindings: {[key: string]: any};
   protected listeners: {[listener: string]: BaseListener};
 
   constructor() {
-    this.dbConfig = tastsQueuesConfig;
     this.bindings = {};
     this.listeners = {};
-  }
-
-  getDbConfig(): DBConnectionConfig {
-    return this.dbConfig;
-  }
-
-  setDbConfig(config: DBConnectionConfig) {
-    this.dbConfig = config;
   }
 
   getBinding<BindingType>(key: string): any {
@@ -51,6 +41,11 @@ export default class App {
   }
 
   start() {
+    // Get the tasksQueues configuration
+    const tasksQueuesConfig = this.getBinding<TasksQueueConfig>(
+      'datasources.tasksQueues.config',
+    );
+
     /* Setup the services */
     // Setup the email service
     const emailService = new EmailService(
@@ -65,15 +60,15 @@ export default class App {
     let listener: BaseListener;
 
     // Set Verification Email listener
-    listener = new VerificationEmailListener(this.dbConfig, emailService);
+    listener = new VerificationEmailListener(tasksQueuesConfig, emailService);
     this.setListener(listener.name, listener);
 
     // Set Password Recovery listener
-    listener = new PasswordRecoveryListener(this.dbConfig, emailService);
+    listener = new PasswordRecoveryListener(tasksQueuesConfig, emailService);
     this.setListener(listener.name, listener);
 
     // Set Tokens Cleanup listener
-    listener = new TokensCleanupListener(this.dbConfig);
+    listener = new TokensCleanupListener(tasksQueuesConfig);
     this.setListener(listener.name, listener);
   }
 

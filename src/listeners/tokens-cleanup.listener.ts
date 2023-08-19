@@ -1,9 +1,8 @@
 import {Job} from 'bullmq';
-import {DBConnectionConfig} from '../datasources';
-import {BaseListener} from './base.listener';
+import {BaseListener, TasksQueueConfig} from './base.listener';
 
 export class TokensCleanupListener extends BaseListener {
-  constructor(dbConfig: DBConnectionConfig) {
+  constructor(dbConfig: TasksQueueConfig) {
     super('TokensCleanup', dbConfig);
   }
 

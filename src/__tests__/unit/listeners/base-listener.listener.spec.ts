@@ -1,13 +1,13 @@
 import {Job} from 'bullmq';
 import {expect} from 'chai';
-import {DBConnectionConfig} from '../../../datasources';
+import {TasksQueueConfig} from '../../../listeners';
 import {getTestTasksQueuesConfig} from '../../fixtures/datasources';
 import {TestBaseListener} from '../../fixtures/listeners';
 import {givenJob} from '../../helpers/app.helper';
 
 describe('Unit Testing - Base Listener', () => {
   const listenerName = 'TestListener';
-  let tasksQueuesConfig: DBConnectionConfig;
+  let tasksQueuesConfig: TasksQueueConfig;
   let baseListener: TestBaseListener;
 
   before(async () => {
