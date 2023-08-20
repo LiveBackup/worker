@@ -1,11 +1,27 @@
-import App from './app';
-import {EmailServiceBindings} from './services';
 import dotenv from 'dotenv';
+import App from './app';
+import {UserDbBindings, UserDbDataSource} from './datasources';
+import {ListenersBindings, TasksQueueConfig} from './listeners';
+import {EmailServiceBindings} from './services';
 
 dotenv.config();
 
 async function main() {
   const app = new App();
+
+  // Set up the user db
+  const userDb = new UserDbDataSource();
+  app.bind(UserDbBindings.DB).to(userDb);
+
+  // Setup the redis connection options
+  app.bind(ListenersBindings.TASKS_QUEUES_CONFIG).to({
+    name: 'tasks_queues',
+    host: process.env.TASKS_QUEUE_HOST ?? 'localhost',
+    port: Number(process.env.TASKS_QUEUE_PORT ?? 6379),
+    db: Number(process.env.USER_DB_DATABASE ?? 0),
+    user: process.env.TASKS_QUEUE_USER,
+    password: process.env.TASKS_QUEUE_PASSWORD,
+  } as TasksQueueConfig);
 
   // Setup the email sender credentials
   app

@@ -1,13 +1,12 @@
 import {Job} from 'bullmq';
-import {DBConnectionConfig} from '../datasources';
 import {EmailService} from '../services';
-import {BaseListener} from './base.listener';
+import {BaseListener, TasksQueueConfig} from './base.listener';
 
 export class VerificationEmailListener extends BaseListener {
   protected emailService: EmailService;
 
-  constructor(dbConfig: DBConnectionConfig, emailService: EmailService) {
-    super('VerificationEmail', dbConfig);
+  constructor(tasksQueuesConfig: TasksQueueConfig, emailService: EmailService) {
+    super('VerificationEmail', tasksQueuesConfig);
     this.emailService = emailService;
   }
 

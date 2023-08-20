@@ -1,10 +1,10 @@
 import {RedisMemoryServer} from 'redis-memory-server';
-import {DBConnectionConfig} from '../../../datasources';
+import {TasksQueueConfig} from '../../../listeners';
 
 const testRedisDB = new RedisMemoryServer();
 
 export const getTestTasksQueuesConfig =
-  async function (): Promise<DBConnectionConfig> {
+  async function (): Promise<TasksQueueConfig> {
     return {
       name: 'test-tasks-queues',
       host: await testRedisDB.getHost(),
