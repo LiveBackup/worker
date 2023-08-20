@@ -22,9 +22,6 @@ export default class App {
   constructor() {
     this.bindings = {};
     this.listeners = {};
-
-    const userDb = new UserDbDataSource();
-    this.bind(UserDbBindings.DB).to(userDb);
   }
 
   getBinding<BindingType>(key: string): any {

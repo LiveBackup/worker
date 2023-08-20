@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import App from './app';
+import {UserDbBindings, UserDbDataSource} from './datasources';
 import {ListenersBindings, TasksQueueConfig} from './listeners';
 import {EmailServiceBindings} from './services';
 
@@ -7,6 +8,10 @@ dotenv.config();
 
 async function main() {
   const app = new App();
+
+  // Set up the user db
+  const userDb = new UserDbDataSource();
+  app.bind(UserDbBindings.DB).to(userDb);
 
   // Setup the redis connection options
   app.bind(ListenersBindings.TASKS_QUEUES_CONFIG).to({
