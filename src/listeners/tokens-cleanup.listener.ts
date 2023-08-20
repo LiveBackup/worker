@@ -1,4 +1,3 @@
-import {Job} from 'bullmq';
 import {TokenService} from '../services/token.service';
 import {BaseListener, TasksQueueConfig} from './base.listener';
 
@@ -10,7 +9,7 @@ export class TokensCleanupListener extends BaseListener {
     this.tokenService = tokenService;
   }
 
-  async executeJob(job: Job): Promise<void> {
-    console.log(`Execute ${job.name} at ${new Date().toISOString()}`);
+  async executeJob(): Promise<void> {
+    await this.tokenService.removeExpiredTokens();
   }
 }
