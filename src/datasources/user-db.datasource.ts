@@ -25,9 +25,8 @@ export namespace UserDbBindings {
 @lifeCycleObserver('datasource')
 export class UserDbDataSource
   extends juggler.DataSource
-  implements LifeCycleObserver
-{
-  static dataSourceName = 'user_db';
+  implements LifeCycleObserver {
+  static readonly dataSourceName = 'user_db';
   static readonly defaultConfig = config;
 
   constructor(
