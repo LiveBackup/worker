@@ -12,24 +12,8 @@ describe('Unit Testing - Templates', () => {
     const template = testTemplate.buildTemplate();
 
     expect(template.length).to.be.greaterThan(0);
-    expect(template).to.be.equal(`
-      <!DOCTYPE html>
-      <html lang="es">
-
-      <head>
-        <title>Test</title>
-        <meta charset="utf-8">
-
-        <style>
-          .html {}
-        </style>
-      </head>
-
-      <body>
-        <p>Hello world<p>
-      </body>
-
-      </html>
-    `);
+    expect(template).to.be.equal(
+      '<!DOCTYPE html><html lang="es"><head><title>Test</title><meta charset="utf-8"><style>.html {}</style></head><body><p>Hello world<p></body></html>\n',
+    );
   });
 });
