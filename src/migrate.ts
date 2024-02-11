@@ -21,7 +21,7 @@ async function main() {
 
   // Migrate the templates
   for (const {name, template} of templates) {
-    console.log(`Migraing ${name} template`);
+    console.log(`Migrating ${name} template`);
     const html = template.buildTemplate();
     fs.writeFileSync(`${folder}/${name}.html`, html);
   }

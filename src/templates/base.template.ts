@@ -36,8 +36,11 @@ export abstract class BaseTemplate {
       </html>
     `;
 
-    // TODO: evaluate if the html can be formated and unnecesary spaces and new
-    // lines can be deleted. Regex were used but they could introduce a vulnerability
-    return html;
+    return html
+      .replace(/\r/gm, '')
+      .split('\n')
+      .map(line => line.trim())
+      .join('')
+      .concat('\n');
   }
 }
